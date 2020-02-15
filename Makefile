@@ -1,5 +1,5 @@
 NAME = fractol
-FLAGS = -g -pg
+FLAGS = -Wall -Wextra -Werror
 SRC = $(wildcard src/*.c)
 OBJ = $(SRC:.c=.o)
 MLX = -L./lib/minilibx_macos -lmlx -framework OpenGL -framework AppKit
