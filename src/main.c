@@ -6,7 +6,7 @@
 /*   By: dmorrige <dmorrige@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 21:20:01 by dmorrige          #+#    #+#             */
-/*   Updated: 2020/02/16 00:18:22 by dmorrige         ###   ########.fr       */
+/*   Updated: 2020/02/16 00:19:32 by dmorrige         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,34 +55,7 @@ int main()
 
     image = mlx_new_image(mlx, WIDTH, HEIGHT); //инициализирует image 
     data = (int *)mlx_get_data_addr(image, &bpp, &linesize, &endian); //массив пикселей
-    int i = 0;
-    int j = 0;
-    while (i < WIDTH) {
-        j = 0;
-        while (j < HEIGHT) {
-            int i2 = i % (255 * 2);
-            int j2 = j % (255 * 2);
-            int gb = 0;
-            int ar = 0;
-            if (i2 > 254) {
-                gb = 255 - i % 255;
-            } else {
-                gb = i % 255;
-            }
-            if (j2 > 254) {
-                ar = 255 - j % 255;
-            } else {
-                ar = j % 255;
-            }
-            // data[j * WIDTH + i] = (gb * 0x00000001 + ar * 0x00000100 + (gb % (ar + 1)) * 0x00000100) & 0x00ffffff;
-            data[j * WIDTH + i] = (gb * gb * 0x00000001 + ar * 0x00000100 + (gb % (ar + 1)) * 0x00000100) & 0x00ffffff;
-            // if (data[j * WIDTH + i] > 0x00ffffff) {
-            //     printf("%x\n", data[j * WIDTH + i]);
-            // }
-            j++;
-        }
-        i++;
-    }
+    data[HEIGHT * WIDTH / 2 + WIDTH / 2] = 0x00ffffff;
     mlx_put_image_to_window(mlx, win, image, 0, 0);
     mlx_hook(win, 17, 0, (ORNUL) ft_close, 0);
     mlx_hook(win, 2, 0, keyevent, 0);
