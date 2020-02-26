@@ -1,6 +1,7 @@
 NAME = fractol
 FLAGS = -Wall -Wextra -Werror
-SRC = $(wildcard src/*.c)
+SRC_FILES = main.c
+SRC = $(addprefix src/, $(SRC_FILES))
 OBJ = $(SRC:.c=.o)
 MLX = -L./lib/minilibx_macos -lmlx -framework OpenGL -framework AppKit
 
