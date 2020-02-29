@@ -25,10 +25,16 @@ typedef struct s_ftct
     float offset_y;
     float move_x;
     float move_y;
+    float mouse_x;
+    float mouse_y;
     float zoom;
     int max_iter;
+    int stop_julia_moving;
 }               t_frct;
 
-void init_fractal(t_frct *fractal);
+void    init_fractal(t_frct *fractal);
+void    mandelbrot(t_frct *fractal, const int x, const int y);
+void    julia(t_frct *fractal, const int x, const int y);
+void    burning_ship(t_frct *fractal, const int x, const int y);
 
 #endif
