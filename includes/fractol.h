@@ -35,6 +35,6 @@ typedef struct s_ftct
 void    init_fractal(t_frct *fractal);
 void    mandelbrot(t_frct *fractal, const int x, const int y);
 void    julia(t_frct *fractal, const int x, const int y);
-void    burning_ship(t_frct *fractal, const int x, const int y);
+void    burningship(t_frct *fractal, const int x, const int y);
 
 #endif

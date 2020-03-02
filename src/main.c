@@ -6,7 +6,7 @@
 /*   By: dmorrige <dmorrige@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 21:20:01 by dmorrige          #+#    #+#             */
-/*   Updated: 2020/02/29 23:35:37 by dmorrige         ###   ########.fr       */
+/*   Updated: 2020/03/02 14:04:36 by dmorrige         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,19 +106,23 @@ void    mandelbrot(t_frct *fractal, const int x, const int y)
 
 void burningship(t_frct *fractal, const int x, const int y)
 {
-    float x1;
-    float y1;
+    float z_r;
+    float z_i;
+    float tmp;
     int iter;
-    float tmp = 0.f;
+    float c_r;
+    float c_i;
 
     iter = 0;
-    x1 = x;
-    y1 = y;
-    while (x1 * x1 + y1 * y1 <= 4 && iter < fractal->max_iter)
+    z_r = 0;
+    z_i = 0;
+    c_r = x * fractal->zoom + fractal->offset_x + fractal->move_x;
+    c_i = y * fractal->zoom + fractal->offset_y + fractal->move_y;
+    while (z_i * z_i + z_r * z_r <= 4 && iter < fractal->max_iter)
     {
-        tmp = x1 * x1 - y1 * y1 + x;
-		y1 = fabsf(2 * x1 * y1 + y);
-		x1 = fabsf(tmp);
+        tmp = z_r;
+		z_r = fabs(tmp * tmp) - z_i * z_i + c_r;
+		z_i = 2 * fabs(tmp * z_i) + c_i;
         iter++;
     }
     if (iter >= fractal->max_iter)
