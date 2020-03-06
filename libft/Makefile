@@ -11,17 +11,17 @@ ft_memmove.c ft_memcpy.c ft_memccpy.c ft_bzero.c ft_atoi.c ft_strlen.c \
 ft_strcpy.c ft_strncpy.c ft_strcmp.c ft_strncmp.c ft_strdup.c ft_memset.c\
 ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstadd.c ft_lstiter.c ft_lstmap.c
 
-OBJ = $(SRC:%.c=%.o)
+OBJ = $(SRC:%.c=src/%.o)
 
-FLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -Iincludes
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	ar rc $(NAME) $(OBJ)
 
-$(OBJ): %.o:%.c
-	gcc -c $(FLAGS) $< -o $@
+src/%.o: src/%.c
+	gcc -c $(CFLAGS) $< -o $@
 
 clean:
 	/bin/rm -f $(OBJ)

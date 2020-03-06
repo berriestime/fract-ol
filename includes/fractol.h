@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <math.h>
-#include "mlx.h"
+#include "../lib/minilibx_macos/mlx.h"
 
 #define WIDTH 720
 #define HEIGHT 480
@@ -30,6 +30,7 @@ typedef struct s_ftct
     float zoom;
     int max_iter;
     int stop_julia_moving;
+    int name;
 }               t_frct;
 
 void    init_fractal(t_frct *fractal);

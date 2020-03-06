@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmorrige <dmorrige@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/15 21:20:01 by dmorrige          #+#    #+#             */
-/*   Updated: 2020/03/02 14:04:36 by dmorrige         ###   ########.fr       */
+/*   Created: 2020/03/06 22:10:04 by dmorrige          #+#    #+#             */
+/*   Updated: 2020/03/06 23:03:48 by dmorrige         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include "../libft/includes/libft.h"
 
 typedef int (*ORNUL)();
 
@@ -191,16 +192,38 @@ void init_fractal(t_frct *fractal)
     fractal->mouse_y = 0.f;
 }
 
-int main()
+int		f_str(char **av, t_frct *f)
+{
+	if (ft_strcmp(av[1], "mandelbrot") == 0)
+		fractal->name = 0;
+	else if (ft_strcmp(av[1], "julia") == 0)
+		fractal->name = 1;
+	else if (ft_strcmp(av[1], "randoms") == 0)
+		fractal->name = 2;
+	else
+	{
+		ft_putendl("Usage /fractol \"mandelbrot\", \"julia\", \"randoms\"");
+		return (0);
+	}
+	return (1);
+}
+
+int main(int ac, char **av)
 {
     t_frct fractal;
-
-    init_mlx(&fractal);
-    init_fractal(&fractal);
-    render(&fractal);
-    mlx_hook(fractal.win, 17, 0, (ORNUL) ft_close, 0);
-    mlx_hook(fractal.win, 2, 0, keyevent, &fractal);
-    mlx_hook(fractal.win, 6, 0, mouse_event, &fractal);
-    mlx_loop(fractal.mlx);
+    if (ac == 2)
+    {
+        if ()
+        init_mlx(&fractal);
+        init_fractal(&fractal);
+        render(&fractal);
+        mlx_hook(fractal.win, 17, 0, (ORNUL) ft_close, 0);
+        mlx_hook(fractal.win, 2, 0, keyevent, &fractal);
+        mlx_hook(fractal.win, 6, 0, mouse_event, &fractal);
+        mlx_loop(fractal.mlx);
+    }
     return (0);
 }
+
+
+
