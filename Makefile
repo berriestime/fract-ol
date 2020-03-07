@@ -4,23 +4,24 @@ FLAGS = -Wall -Wextra -Werror
 SRC_FILES = main.c
 SRC = $(addprefix src/, $(SRC_FILES))
 OBJ = $(SRC:.c=.o)
-MLX = -L./lib/minilibx_macos -lm -lmlx -framework OpenGL -framework AppKit
+MLX = -L ./lib/minilibx_macos -lmlx -framework OpenGL -framework AppKit
+LIBFT = -L ./libft -lft
+INCLUDES = -I includes/ -I libft/includes/
 
-INCLUDES = -I includes/
-HEADER = ./includes/fractol.h
-
-$(NAME): $(OBJ) $(HEADER)
-	gcc $(FLAGS) $(OBJ) -o $(NAME) $(MLX) 
+$(NAME): $(OBJ)
+	gcc $(FLAGS) $(OBJ) -o $(NAME) $(MLX) $(LIBFT)
 
 %.o: %.c
-	gcc $(FLAGS) -c $< -o $@ $(INCLUDES)
+	gcc -c $(FLAGS) $< -o $@ $(INCLUDES)
 
 all: 
 	$(MAKE) -C ./libft
+	$(MAKE) -C ./lib/minilibx_macos
 	$(MAKE) $(NAME)
 
 clean:
 	$(MAKE) -C ./libft clean
+	$(MAKE) -C ./lib/minilibx_macos clean
 	rm -f $(OBJ)
 
 fclean: clean
